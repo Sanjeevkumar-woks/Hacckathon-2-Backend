@@ -1,8 +1,3 @@
-//   "type": "commonjs"
-// const express = require('express');
-// const {MongoClient} = require('mongodb');
-
-//   "type": "module"
 import express from 'express';
 import {MongoClient} from 'mongodb';
 import cors from 'cors';
@@ -11,6 +6,8 @@ dotenv.config();
 
 import { moviesRouter } from './routes/movies.js';
 import { usersRouter } from './routes/users.js';
+import { theatersRouter } from './routes/theaters.js';
+import { bookingsRouter } from './routes/bookings.js';
 
 const app = express();
 const PORT = process.env.PORT;
@@ -30,9 +27,6 @@ export const client = await createConnection();
 
 // Rest API endpoints
 
-// Inbuild middleware
-// say data is in json and it must be passed that way
-// Interceptor for parsing as json
 app.use(express.json());
 // To allow cors
 app.use(cors());
@@ -43,20 +37,12 @@ app.get('/', (req, res) => {
 
 app.use('/movies', moviesRouter);
 
+app.use('/theaters', theatersRouter);
+
+app.use('/bookings', bookingsRouter);
+
 app.use('/users', usersRouter);
-
-// update by movie id
-// Interstellar -> rating -> 8.6 -> 9
-
-
-
-// C - Create - POST
-// R - Read - GET
-// U - update - PUT
-// D - Delete - DELETE
 
 app.listen(PORT, () => {
     console.log('Server started on port ', PORT);
 });
-
-// console.log(genPassword("pass@123")); 

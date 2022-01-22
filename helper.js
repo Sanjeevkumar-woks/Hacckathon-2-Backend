@@ -1,6 +1,6 @@
 import { client } from './index.js';
 import bcrypt from 'bcrypt';
-import { ObjectId } from 'mongodb';
+
 
 // Movies
 export async function deleteMovieById(id) {
@@ -34,6 +34,75 @@ export async function updateMovieById(id, { poster, rating, summary, title, trai
         .collection("movies")
         .updateOne({ _id: ObjectId(id) }, { $set: { poster, rating, summary, title, trailer }});
 }
+
+// Theaters
+export async function deleteTheaterById(id) {
+    return await client
+        .db("guvi")
+        .collection("theater")
+        .deleteOne({ id:id });
+}
+export async function getTheaterById(id) {
+    return await client
+        .db("guvi")
+        .collection("theater")
+        .findOne({ id:id});
+}
+export async function addTheater(newTheater) {
+    return await client
+        .db("guvi")
+        .collection("theater")
+        .insertMany(newTheater);
+}
+export async function getAllTheaters() {
+    return await client
+        .db("guvi")
+        .collection("theater")
+        .find()
+        .toArray();
+}
+export async function updateTheaterById(id, { name,movies,showtimes }) {
+    return await client
+        .db("guvi")
+        .collection("theater")
+        .updateOne({ id:id }, { $set: { name,movies,showtimes}});
+}
+
+
+
+// Bookings
+export async function deleteBookingById(bookingid) {
+    return await client
+        .db("guvi")
+        .collection("bookings")
+        .deleteOne({ bookingid:bookingid });
+}
+export async function getBoookingById(bookingid) {
+    return await client
+        .db("guvi")
+        .collection("bookings")
+        .findOne({ bookingid:bookingid});
+}
+export async function addBooking(newBooking) {
+    return await client
+        .db("guvi")
+        .collection("bookings")
+        .insertMany(newBooking);
+}
+export async function getAllBookings() {
+    return await client
+        .db("guvi")
+        .collection("bookings")
+        .find()
+        .toArray();
+}
+export async function updateBookingById(bookingid, { username,email,movieName,noOfSeats,theaterName }) {
+    return await client
+        .db("guvi")
+        .collection("bookings")
+        .updateOne({ bookingid:bookingid}, { $set: {username,email,movieName,noOfSeats,theaterName,}});
+}
+
 
 // Password
 export async function genPassword(password) {

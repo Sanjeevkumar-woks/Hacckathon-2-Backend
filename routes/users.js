@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import express from 'express';
 const router = express.Router();
 
-// Insert Movies
+// Insert User
 router.post('/signup', async (req, res) => {
     const { username, password } = req.body;
     console.log(username, password);
@@ -24,6 +24,7 @@ router.post('/signup', async (req, res) => {
     res.send(result);
 });
 
+// login User
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     console.log(username, password);
@@ -45,9 +46,3 @@ router.post('/login', async (req, res) => {
 })
 
 export const usersRouter = router;
-
-// Task
-// Validate if username already present
-// Validate if password matches the pattern
-
-// Store the user details - users collection - username & hashedPassword
