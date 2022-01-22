@@ -10,7 +10,7 @@ import { theatersRouter } from './routes/theaters.js';
 import { bookingsRouter } from './routes/bookings.js';
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 9200;
 
 // const MONGO_URL = "mongodb://localhost";
 const MONGO_URL = process.env.MONGO_URL;

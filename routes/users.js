@@ -1,4 +1,4 @@
-import { genPassword, createUser, getUserByName } from '../helper.js'
+import { genPassword, createUser,getAllusers,getUserByName } from '../helper.js'
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -44,5 +44,12 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({id: userFromDB._id}, process.env.SECRET_KEY);
     res.send({message: "Successful login", token: token});
 })
+
+
+router.get('/', async (req, res) => {
+    console.log(req.query);
+    const users = await getAllusers(req);
+    res.send(users);
+});
 
 export const usersRouter = router;

@@ -125,3 +125,10 @@ export async function getUserByName(username) {
         .collection("users")
         .findOne({ username: username });
 }
+export async function getAllusers(req) {
+    return await client
+        .db("guvi")
+        .collection("users")
+        .find(req.query)
+        .toArray();
+}
