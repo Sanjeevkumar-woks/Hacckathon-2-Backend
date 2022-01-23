@@ -7,13 +7,13 @@ export async function deleteMovieById(id) {
     return await client
         .db("guvi")
         .collection("movies")
-        .deleteOne({ _id: ObjectId(id) });
+        .deleteOne({ id: id });
 }
 export async function getMovieById(id) {
     return await client
         .db("guvi")
         .collection("movies")
-        .findOne({ _id: ObjectId(id) });
+        .findOne({ id:id });
 }
 export async function addMovie(newMovie) {
     return await client
@@ -32,7 +32,7 @@ export async function updateMovieById(id, { poster, rating, summary, title, trai
     return await client
         .db("guvi")
         .collection("movies")
-        .updateOne({ _id: ObjectId(id) }, { $set: { poster, rating, summary, title, trailer }});
+        .updateOne({ id: id }, { $set: { poster, rating, summary, title, trailer }});
 }
 
 // Theaters
