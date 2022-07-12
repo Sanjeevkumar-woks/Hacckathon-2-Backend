@@ -26,8 +26,8 @@ async function createConnection(){
 export const client = await createConnection(); 
 
 // Rest API endpoints
-
 app.use(express.json());
+
 // To allow cors
 app.use(cors());
 
